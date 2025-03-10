@@ -1,41 +1,34 @@
 import numpy as np
-import torch
+import tensorflow as tf
 from skimage.draw import polygon, disk
 import random
 from copy import deepcopy
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from torch.utils.data import DataLoader, TensorDataset
 import matplotlib.pyplot as plt
 
-    
 def is_dark(color):
     # Ensure the color is a numpy array
     color = np.array(color)
-
     # Calculate luminance
     luminance = 0.299 * color[0] + 0.587 * color[1] + 0.114 * color[2]
-
     # Define the threshold for darkness
     threshold = 0.15
-
     # Determine if the color is dark
     return luminance < threshold
 
-
 def generate_blank_image(image_size):
-    image        = np.ones((*image_size, 5)) # Shape = [image_width, image_height, 3]
+    image = np.ones((*image_size, 5))  # Shape = [image_width, image_height, 5]
     image_width, image_height = image_size
     for col in range(image_width):
-        image[:,col,4]=col/image_width
+        image[:, col, 4] = col / image_width
     for row in range(image_height):
-        image[row,:,3]=row/image_height
+        image[row, :, 3] = row / image_height
     return image
 
 def draw_triangle(image, center, size):
     r, c = center
-    points = np.array([[r - size, c], [r + size, c - size], [r + size, c + size]])
+    points = np.array([[r - size, c],
+                       [r + size, c - size],
+                       [r + size, c + size]])
     rr, cc = polygon(points[:, 0], points[:, 1], image.shape)
     return rr, cc
 
@@ -43,13 +36,13 @@ def draw_square(image, center, size):
     r, c = center
     half_size = size // 2
     rr, cc = polygon([r - half_size, r + half_size, r + half_size, r - half_size],
-                     [c - half_size, c - half_size, c + half_size, c + half_size], image.shape)
+                     [c - half_size, c - half_size, c + half_size, c + half_size],
+                     image.shape)
     return rr, cc
 
 def draw_circle(image, center, size):
     rr, cc = disk(center, size, shape=image.shape)
     return rr, cc
-
 
 def generate_dataset(
     num_images,
@@ -62,7 +55,7 @@ def generate_dataset(
     shape_overlap_max=None  # Percentage overlap allowed; discard image if exceeded
 ):
     images = []
-    shape_types = ['circle', 'triangle', 'square'] if same_shape==None else [same_shape]
+    shape_types = ['circle', 'triangle', 'square'] if same_shape is None else [same_shape]
     unique_shape_id = 1
 
     for _ in range(num_images):
@@ -73,12 +66,13 @@ def generate_dataset(
             output_image = np.zeros((*image_size, 7), dtype=np.float32)
             
             num_shapes = random.randint(min_shapes, max_shapes)
-
             shape_masks = []  # Store individual shape masks
+            
             for _ in range(num_shapes):
                 shape_type = random.choice(shape_types)
                 size = random.randint(*shape_size_range)
                 center = (np.random.rand() * image_size[0], np.random.rand() * image_size[1])
+                
                 if shape_type == 'triangle':
                     rr, cc = draw_triangle(image, center, size)
                     shape_type_id = 2
@@ -105,7 +99,6 @@ def generate_dataset(
                 mask = np.zeros(image_size, dtype=bool)
                 mask[rr, cc] = True
                 shape_masks.append(mask)
-
                 unique_shape_id += 1
             
             # Check for overlap if shape_overlap_max is specified
@@ -115,27 +108,30 @@ def generate_dataset(
                 overlap_percentage = (overlap_area / total_area) * 100
 
                 if overlap_percentage > shape_overlap_max:
-                    # Discard the image and regenerate
-                    continue
+                    continue  # Discard the image and regenerate
 
             # Copy the RGB image to the first 3 channels of the output image
             output_image[..., :5] = image
 
             # Check if the output_image contains at least one shape
             valid_image = np.any(output_image[..., 5] > 0)
-
         images.append(output_image)
+    
+    # Return a TensorFlow tensor
+    return tf.convert_to_tensor(np.array(images))
 
-    return torch.tensor(np.array(images))
-
-def plot_toy(dataset=None,evtnum=None):
-    assert dataset!=None
-    if evtnum==None:
-        evtnum=np.random.randint(0,len(dataset))
-        print("Plotting random event",evtnum,"of",len(dataset))
-    data_reshape = deepcopy(dataset[evtnum])
-    image_data = data_reshape[:,:,0:3]
-    fig, axs = plt.subplots(1, 1, figsize=(4, 4))
-    axs.imshow(image_data)
+def plot_toy(dataset=None, evtnum=None):
+    assert dataset is not None, "Dataset must be provided!"
+    if evtnum is None:
+        evtnum = np.random.randint(0, len(dataset))
+        print("Plotting random event", evtnum, "of", len(dataset))
+    # Convert to a numpy array if dataset is a TensorFlow tensor
+    if isinstance(dataset, tf.Tensor):
+        data_reshape = deepcopy(dataset[evtnum].numpy())
+    else:
+        data_reshape = deepcopy(dataset[evtnum])
+    image_data = data_reshape[:, :, 0:3]
+    fig, ax = plt.subplots(1, 1, figsize=(4, 4))
+    ax.imshow(image_data)
     plt.tight_layout()
     plt.show()
