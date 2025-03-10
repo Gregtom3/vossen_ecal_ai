@@ -119,19 +119,3 @@ def generate_dataset(
     
     # Return a TensorFlow tensor
     return tf.convert_to_tensor(np.array(images))
-
-def plot_toy(dataset=None, evtnum=None):
-    assert dataset is not None, "Dataset must be provided!"
-    if evtnum is None:
-        evtnum = np.random.randint(0, len(dataset))
-        print("Plotting random event", evtnum, "of", len(dataset))
-    # Convert to a numpy array if dataset is a TensorFlow tensor
-    if isinstance(dataset, tf.Tensor):
-        data_reshape = deepcopy(dataset[evtnum].numpy())
-    else:
-        data_reshape = deepcopy(dataset[evtnum])
-    image_data = data_reshape[:, :, 0:3]
-    fig, ax = plt.subplots(1, 1, figsize=(4, 4))
-    ax.imshow(image_data)
-    plt.tight_layout()
-    plt.show()
