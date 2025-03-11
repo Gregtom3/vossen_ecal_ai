@@ -124,7 +124,7 @@ def calculate_losses(y_true, y_pred, q_min, batch_size, K):
 
     # Get condensation loss
     loss_dict = condensation_loss(
-        q_min=q_min, object_id=object_id, event_id=event_id, beta=beta, x=x, noise_threshold=-1
+        q_min=q_min, object_id=object_id, event_id=event_id, beta=beta, x=x, noise_threshold=0
     )
 
     return loss_dict
