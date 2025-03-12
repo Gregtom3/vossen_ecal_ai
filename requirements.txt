@@ -7,3 +7,4 @@ ipython
 pandas
 catboost
 scikit-learn
+pylint
