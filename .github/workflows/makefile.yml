@@ -18,3 +18,8 @@ jobs:
     - name: Test
       run: |
         make test
+    - name: Upload histogram artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: gaussian-histogram
+        path: gaussian_histogram.png
