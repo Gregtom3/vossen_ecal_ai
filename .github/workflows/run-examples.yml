@@ -15,9 +15,13 @@ jobs:
         run: |
           make install
       
-      - name: Run examples
+      - name: Run example01-plot-photons.py
         run: |
-          make examples
+          make example01
+
+      - name: Run example02-train-photons.py
+        run: |
+          make example02
 
       - name: Upload histogram artifact
         uses: actions/upload-artifact@v4
