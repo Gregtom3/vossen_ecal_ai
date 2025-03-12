@@ -15,7 +15,7 @@ def plot_features(df, dataset_name, output_dir):
     os.makedirs(dataset_dir, exist_ok=True)
     
     # Get a list of numeric columns
-    numeric_cols = [col for col in df.columns if pd.api.types.is_numeric_dtype(df[col])]
+    numeric_cols = [col for col in df.columns if pd.api.types.is_numeric_dtype(df[col])] 
     
     # Determine grid dimensions (5 columns)
     n_cols = 5
