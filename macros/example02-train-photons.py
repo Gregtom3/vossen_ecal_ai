@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import itertools
 from catboost import CatBoostClassifier
+import os
 
 def parse_data(df):
     columns = list(df.columns)
