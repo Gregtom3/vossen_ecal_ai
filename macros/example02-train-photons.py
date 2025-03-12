@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
 import itertools
 from catboost import CatBoostClassifier
@@ -131,7 +133,7 @@ def loss_plot(model, output_dir):
     plt.close()
     print(f"Saved loss plot to {filename}")
 
-def invariant_mass_plot(df_validation, model, output_dir):
+def invariant_mass_plot(df_validation, X_validation, model, output_dir):
 
     all_pi0_masses, subset2_masses, subset3_masses, subset4_masses, subset5_masses = get_mass_vectors(df_validation)
 
@@ -262,7 +264,8 @@ def main():
     loss_plot(model, output_dir)
 
     # Create invariant mass plot
-    invariant_mass_plot(df_validation, model, output_dir)
+    invariant_mass_plot(df_validation, X_val, model, output_dir)
+
 
 if __name__ == "__main__":
     main()
