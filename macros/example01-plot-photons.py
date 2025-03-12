@@ -62,7 +62,7 @@ def main():
     val_df   = pd.read_csv(val_csv)
     
     # Define output directory for plots
-    output_dir = "artifacts"
+    output_dir = "artifacts/example01"
     os.makedirs(output_dir, exist_ok=True)
 
     # Plot features for each CSV
