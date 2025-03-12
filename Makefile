@@ -5,10 +5,10 @@ install:
 test:
 	python -m pytest -vv tests/test00-run.py
 
-plots: 
+examples: 
 	python macros/example01-plot-photons.py
 
 lint:
 	pylint --disable=R,C tests/*.py
 
-all: install lint test plots
+all: install lint test
