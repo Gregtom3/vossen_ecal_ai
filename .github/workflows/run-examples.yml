@@ -1,8 +1,5 @@
 name: Run Examples
-on:
-  push:
-    paths:
-      - 'macros/**'
+on: [push]
 jobs:
   examples:
     runs-on: ubuntu-latest
