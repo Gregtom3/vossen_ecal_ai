@@ -1,0 +1,9 @@
+numpy
+tensorflow
+scikit-image
+matplotlib
+ipywidgets
+ipython
+pandas
+catboost
+scikit-learn
