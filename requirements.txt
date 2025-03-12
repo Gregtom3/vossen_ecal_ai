@@ -8,3 +8,4 @@ pandas
 catboost
 scikit-learn
 pylint
+pytest
