@@ -26,9 +26,9 @@ def plot_features(df, dataset_name, output_dir):
             print(f"Skipping non-numeric feature '{col}' in {dataset_name}.")
 
 def main():
-    train_csv = "../data/photon_data_train.csv"
-    test_csv  = "../data/photon_data_test.csv"
-    val_csv   = "../data/photon_data_val.csv"
+    train_csv = "data/photon_data_train.csv"
+    test_csv  = "data/photon_data_test.csv"
+    val_csv   = "data/photon_data_val.csv"
 
     # Read CSV files into DataFrames
     train_df = pd.read_csv(train_csv)
