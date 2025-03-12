@@ -261,5 +261,8 @@ def main():
     # Create loss plot
     loss_plot(model, output_dir)
 
+    # Create invariant mass plot
+    invariant_mass_plot(df_validation, output_dir)
+
 if __name__ == "__main__":
     main()
