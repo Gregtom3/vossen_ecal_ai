@@ -25,5 +25,5 @@ jobs:
       - name: Upload histogram artifact
         uses: actions/upload-artifact@v4
         with:
-          name: plots
-          path: plots
+          name: artifacts
+          path: artifacts

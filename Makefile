@@ -7,7 +7,8 @@ test:
 
 examples: 
 	python macros/example01-plot-photons.py
-
+	python macros/example02-train-photons.py
+	
 lint:
 	pylint --disable=R,C tests/*.py
 
