@@ -9,3 +9,5 @@ catboost
 scikit-learn
 pylint
 pytest
+tqdm
+h5py
