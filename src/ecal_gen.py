@@ -33,7 +33,7 @@ class ECALDataset:
         self.K = K
         # Preallocate the dataset arrays:
         # X: (N, K, 29) initialized to zeros.
-        self.X = np.zeros((N, self.K, 29), dtype=np.float32)
+        self.X = np.zeros((N, self.K, 9), dtype=np.float32)
         # y: (N, K, 2) initialized to -1.
         self.y = -1 * np.ones((N, self.K, 2), dtype=np.int32)
         
@@ -128,7 +128,7 @@ class ECALDataset:
                 event_X[hit_index, 5] = flash_row["xe"]
                 event_X[hit_index, 6] = flash_row["ye"]
                 event_X[hit_index, 7] = flash_row["ze"]
-                event_X[hit_index, 28] = flash_row["Component"]
+                event_X[hit_index, 8] = flash_row["Component"]
                 event_y[hit_index, 0] = global_particle_id
                 event_y[hit_index, 1] = 22
                 hit_index += 1
