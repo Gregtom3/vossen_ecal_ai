@@ -32,8 +32,8 @@ class ECALDataset:
         self.force_same_sector = force_same_sector
         self.K = K
         # Preallocate the dataset arrays:
-        # X: (N, K, 7) initialized to zeros.
-        self.X = np.zeros((N, self.K, 7), dtype=np.float32)
+        # X: (N, K, 8) initialized to zeros.
+        self.X = np.zeros((N, self.K, 8), dtype=np.float32)
         # y: (N, K, 1) initialized to -1.
         self.y = -1 * np.ones((N, self.K, 1), dtype=np.int32)
         
@@ -129,6 +129,7 @@ class ECALDataset:
                 event_X[hit_index, 4] = flash_row["ye"]
                 event_X[hit_index, 5] = flash_row["ze"]
                 event_X[hit_index, 6] = flash_row["Component"]
+                event_X[hit_index, 7] = flash_row["Layer"]
                 event_y[hit_index, 0] = global_particle_id
                 hit_index += 1
         return hit_index
@@ -146,7 +147,7 @@ class ECALDataset:
             while True:  # Retry loop for the event.
                 event_failed = False
                 # Create temporary buffers for the event.
-                event_X = np.zeros((max_hits, 7), dtype=np.float32)
+                event_X = np.zeros((max_hits, 8), dtype=np.float32)
                 event_y = -1 * np.ones((max_hits, 1), dtype=np.int32)
                 local_hit_index = 0
                 event_start_global_particle_id = global_particle_id
@@ -189,6 +190,7 @@ class ECALDataset:
                     event_X[local_hit_index, 4] = row1["ye"]
                     event_X[local_hit_index, 5] = row1["ze"]
                     event_X[local_hit_index, 6] = row1["Component"]
+                    event_X[local_hit_index, 7] = row1["Layer"]
                     event_y[local_hit_index, 0] = global_particle_id
                     local_hit_index += 1
                     
@@ -221,6 +223,7 @@ class ECALDataset:
                     event_X[local_hit_index, 4] = candidate["ye"]
                     event_X[local_hit_index, 5] = candidate["ze"]
                     event_X[local_hit_index, 6] = candidate["Component"]
+                    event_X[local_hit_index, 7] = candidate["Layer"]
                     event_y[local_hit_index, 0] = global_particle_id
                     local_hit_index += 1
                     
@@ -257,6 +260,7 @@ class ECALDataset:
                     event_X[local_hit_index, 4] = candidate["ye"]
                     event_X[local_hit_index, 5] = candidate["ze"]
                     event_X[local_hit_index, 6] = candidate["Component"]
+                    event_X[local_hit_index, 7] = candidate["Layer"]
                     event_y[local_hit_index, 0] = global_particle_id
                     local_hit_index += 1
                     
