@@ -222,7 +222,7 @@ class ECALDataset:
                     event_X[local_hit_index, 5] = candidate["xe"]
                     event_X[local_hit_index, 6] = candidate["ye"]
                     event_X[local_hit_index, 7] = candidate["ze"]
-                    event_X[local_hit_index, 28] = candidate["Component"]
+                    event_X[local_hit_index, 8] = candidate["Component"]
                     event_y[local_hit_index, 0] = global_particle_id
                     event_y[local_hit_index, 1] = 22
                     local_hit_index += 1
@@ -259,7 +259,7 @@ class ECALDataset:
                     event_X[local_hit_index, 5] = candidate["xe"]
                     event_X[local_hit_index, 6] = candidate["ye"]
                     event_X[local_hit_index, 7] = candidate["ze"]
-                    event_X[local_hit_index, 28] = candidate["Component"]
+                    event_X[local_hit_index, 8] = candidate["Component"]
                     event_y[local_hit_index, 0] = global_particle_id
                     event_y[local_hit_index, 1] = 22
                     local_hit_index += 1
