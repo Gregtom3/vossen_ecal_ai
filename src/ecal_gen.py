@@ -146,7 +146,7 @@ class ECALDataset:
             while True:  # Retry loop for the event.
                 event_failed = False
                 # Create temporary buffers for the event.
-                event_X = np.zeros((max_hits, 9), dtype=np.float32)
+                event_X = np.zeros((max_hits, 7), dtype=np.float32)
                 event_y = -1 * np.ones((max_hits, 2), dtype=np.int32)
                 local_hit_index = 0
                 event_start_global_particle_id = global_particle_id
