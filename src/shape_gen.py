@@ -45,7 +45,7 @@ def draw_circle(image, center, size):
     return rr, cc
 
 def generate_dataset(
-    num_images,
+    num_images=100,
     image_size=(64, 64),
     min_shapes=1,
     max_shapes=9,
