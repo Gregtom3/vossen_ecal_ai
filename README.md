@@ -1,4 +1,4 @@
-[![CI](https://github.com/Gregtom3/vossen_ecal_ai/actions/workflows/makefile.yml/badge.svg)](https://github.com/Gregtom3/vossen_ecal_ai/actions/workflows/makefile.yml)
+[![CI](https://github.com/Gregtom3/vossen_ecal_ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Gregtom3/vossen_ecal_ai/actions/workflows/ci.yml)
 
 # AI-assisted calorimeter clustering at CLAS12
 
