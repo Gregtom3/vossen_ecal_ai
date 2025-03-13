@@ -32,10 +32,10 @@ class ECALDataset:
         self.force_same_sector = force_same_sector
         self.K = K
         # Preallocate the dataset arrays:
-        # X: (N, K, 9) initialized to zeros.
-        self.X = np.zeros((N, self.K, 9), dtype=np.float32)
-        # y: (N, K, 2) initialized to -1.
-        self.y = -1 * np.ones((N, self.K, 2), dtype=np.int32)
+        # X: (N, K, 7) initialized to zeros.
+        self.X = np.zeros((N, self.K, 7), dtype=np.float32)
+        # y: (N, K, 1) initialized to -1.
+        self.y = -1 * np.ones((N, self.K, 1), dtype=np.int32)
         
         self._load_csv()
         self._create_dataset()
@@ -122,15 +122,14 @@ class ECALDataset:
             possible = df_layer[df_layer["Component"] == new_comp]
             if not possible.empty:
                 flash_row = possible.sample(n=1).iloc[0]
-                event_X[hit_index, 2] = flash_row["xo"]
-                event_X[hit_index, 3] = flash_row["yo"]
-                event_X[hit_index, 4] = flash_row["zo"]
-                event_X[hit_index, 5] = flash_row["xe"]
-                event_X[hit_index, 6] = flash_row["ye"]
-                event_X[hit_index, 7] = flash_row["ze"]
-                event_X[hit_index, 8] = flash_row["Component"]
+                event_X[hit_index, 0] = flash_row["xo"]
+                event_X[hit_index, 1] = flash_row["yo"]
+                event_X[hit_index, 2] = flash_row["zo"]
+                event_X[hit_index, 3] = flash_row["xe"]
+                event_X[hit_index, 4] = flash_row["ye"]
+                event_X[hit_index, 5] = flash_row["ze"]
+                event_X[hit_index, 6] = flash_row["Component"]
                 event_y[hit_index, 0] = global_particle_id
-                event_y[hit_index, 1] = 22
                 hit_index += 1
         return hit_index
 
@@ -183,15 +182,14 @@ class ECALDataset:
                         print("Layer 1 sampling error for sector", sector, "in event", event)
                         event_failed = True
                         break
-                    event_X[local_hit_index, 2] = row1["xo"]
-                    event_X[local_hit_index, 3] = row1["yo"]
-                    event_X[local_hit_index, 4] = row1["zo"]
-                    event_X[local_hit_index, 5] = row1["xe"]
-                    event_X[local_hit_index, 6] = row1["ye"]
-                    event_X[local_hit_index, 7] = row1["ze"]
-                    event_X[local_hit_index, 8] = row1["Component"]
+                    event_X[local_hit_index, 0] = row1["xo"]
+                    event_X[local_hit_index, 1] = row1["yo"]
+                    event_X[local_hit_index, 2] = row1["zo"]
+                    event_X[local_hit_index, 3] = row1["xe"]
+                    event_X[local_hit_index, 4] = row1["ye"]
+                    event_X[local_hit_index, 5] = row1["ze"]
+                    event_X[local_hit_index, 6] = row1["Component"]
                     event_y[local_hit_index, 0] = global_particle_id
-                    event_y[local_hit_index, 1] = 22
                     local_hit_index += 1
                     
                     row_layer1 = row1.copy()
@@ -216,15 +214,14 @@ class ECALDataset:
                         print("Layer 2 fail for sector", sector, "in event", event)
                         event_failed = True
                         break
-                    event_X[local_hit_index, 2] = candidate["xo"]
-                    event_X[local_hit_index, 3] = candidate["yo"]
-                    event_X[local_hit_index, 4] = candidate["zo"]
-                    event_X[local_hit_index, 5] = candidate["xe"]
-                    event_X[local_hit_index, 6] = candidate["ye"]
-                    event_X[local_hit_index, 7] = candidate["ze"]
-                    event_X[local_hit_index, 8] = candidate["Component"]
+                    event_X[local_hit_index, 0] = candidate["xo"]
+                    event_X[local_hit_index, 1] = candidate["yo"]
+                    event_X[local_hit_index, 2] = candidate["zo"]
+                    event_X[local_hit_index, 3] = candidate["xe"]
+                    event_X[local_hit_index, 4] = candidate["ye"]
+                    event_X[local_hit_index, 5] = candidate["ze"]
+                    event_X[local_hit_index, 6] = candidate["Component"]
                     event_y[local_hit_index, 0] = global_particle_id
-                    event_y[local_hit_index, 1] = 22
                     local_hit_index += 1
                     
                     row_layer2 = candidate.copy()
@@ -253,15 +250,14 @@ class ECALDataset:
                         print("Layer 3 fail for sector", sector, "in event", event)
                         event_failed = True
                         break
-                    event_X[local_hit_index, 2] = candidate["xo"]
-                    event_X[local_hit_index, 3] = candidate["yo"]
-                    event_X[local_hit_index, 4] = candidate["zo"]
-                    event_X[local_hit_index, 5] = candidate["xe"]
-                    event_X[local_hit_index, 6] = candidate["ye"]
-                    event_X[local_hit_index, 7] = candidate["ze"]
-                    event_X[local_hit_index, 8] = candidate["Component"]
+                    event_X[local_hit_index, 0] = candidate["xo"]
+                    event_X[local_hit_index, 1] = candidate["yo"]
+                    event_X[local_hit_index, 2] = candidate["zo"]
+                    event_X[local_hit_index, 3] = candidate["xe"]
+                    event_X[local_hit_index, 4] = candidate["ye"]
+                    event_X[local_hit_index, 5] = candidate["ze"]
+                    event_X[local_hit_index, 6] = candidate["Component"]
                     event_y[local_hit_index, 0] = global_particle_id
-                    event_y[local_hit_index, 1] = 22
                     local_hit_index += 1
                     
                     row_layer3 = candidate.copy()
