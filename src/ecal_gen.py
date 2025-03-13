@@ -32,7 +32,7 @@ class ECALDataset:
         self.force_same_sector = force_same_sector
         self.K = K
         # Preallocate the dataset arrays:
-        # X: (N, K, 29) initialized to zeros.
+        # X: (N, K, 9) initialized to zeros.
         self.X = np.zeros((N, self.K, 9), dtype=np.float32)
         # y: (N, K, 2) initialized to -1.
         self.y = -1 * np.ones((N, self.K, 2), dtype=np.int32)
@@ -147,7 +147,7 @@ class ECALDataset:
             while True:  # Retry loop for the event.
                 event_failed = False
                 # Create temporary buffers for the event.
-                event_X = np.zeros((max_hits, 29), dtype=np.float32)
+                event_X = np.zeros((max_hits, 9), dtype=np.float32)
                 event_y = -1 * np.ones((max_hits, 2), dtype=np.int32)
                 local_hit_index = 0
                 event_start_global_particle_id = global_particle_id
@@ -189,7 +189,7 @@ class ECALDataset:
                     event_X[local_hit_index, 5] = row1["xe"]
                     event_X[local_hit_index, 6] = row1["ye"]
                     event_X[local_hit_index, 7] = row1["ze"]
-                    event_X[local_hit_index, 28] = row1["Component"]
+                    event_X[local_hit_index, 8] = row1["Component"]
                     event_y[local_hit_index, 0] = global_particle_id
                     event_y[local_hit_index, 1] = 22
                     local_hit_index += 1
