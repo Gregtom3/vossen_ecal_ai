@@ -39,8 +39,6 @@ class ECALDataset:
         
         self._load_csv()
         self._create_dataset()
-        # Automatically save to data.h5 when the dataset is created.
-        self.save_to_h5("data.h5")
 
     def _load_csv(self):
         """Loads the CSV file and organizes hits by sector and layer."""
