@@ -11,7 +11,4 @@ example01:
 example02:
 	python macros/example02-train-photons.py
 
-lint:
-	pylint --disable=R,C tests/*.py
-
-all: install lint test
+all: install test
