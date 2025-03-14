@@ -1,7 +1,7 @@
 [![CI](https://github.com/Gregtom3/vossen_ecal_ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Gregtom3/vossen_ecal_ai/actions/workflows/ci.yml)
 [![Run Examples](https://github.com/Gregtom3/vossen_ecal_ai/actions/workflows/run-examples.yml/badge.svg)](https://github.com/Gregtom3/vossen_ecal_ai/actions/workflows/run-examples.yml)
 
-! This repository is a work in progress ! Most of the current work can be found in `notebooks/`.
+! This repository is a work in progress !
 
 # AI-assisted calorimeter clustering at CLAS12
 
